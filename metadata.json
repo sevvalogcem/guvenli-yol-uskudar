@@ -1,0 +1,6 @@
+{
+  "name": "Güvenli Yol ve Aydınlık Sokaklar",
+  "description": "Şehrindeki güvenli noktaları ve iyi aydınlatılmış rotaları bul.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": []
+}
