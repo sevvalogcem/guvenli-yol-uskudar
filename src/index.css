@@ -1,11 +1,84 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+/* =====================================================
+   TEMA SİSTEMİ — CSS Custom Properties
+   ===================================================== */
+
+:root {
+  /* Dark tema (varsayılan) */
+  --bg-base: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-surface-2: #1e293b66;
+  --bg-surface-3: #0f172a80;
+  --border-color: #334155;
+  --border-color-subtle: #1e293b80;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-bg: #6366f120;
+  --card-bg: #1e293b66;
+  --card-hover: #1e293bcc;
+  --popup-bg: rgba(15, 23, 42, 0.9);
+  --sidebar-bg: #0f172a;
+  --header-bg: rgba(15, 23, 42, 0.95);
+  --scrollbar-thumb: #334155;
+  --scrollbar-track: transparent;
+  --dot-color: #334155;
+  --shadow-accent: rgba(99, 102, 241, 0.3);
+  --map-attribution: #64748b;
+  --badge-shadow: rgba(0,0,0,0.4);
+}
+
+html[data-theme="light"] {
+  --bg-base: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #ffffffcc;
+  --bg-surface-3: #f8fafccc;
+  --border-color: #e2e8f0;
+  --border-color-subtle: #e2e8f080;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --accent: #4f46e5;
+  --accent-hover: #6366f1;
+  --accent-bg: #6366f115;
+  --card-bg: #ffffffcc;
+  --card-hover: #f8fafcee;
+  --popup-bg: rgba(255, 255, 255, 0.95);
+  --sidebar-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.97);
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-track: #f1f5f9;
+  --dot-color: #e2e8f0;
+  --shadow-accent: rgba(79, 70, 229, 0.2);
+  --map-attribution: #94a3b8;
+  --badge-shadow: rgba(0,0,0,0.1);
+}
 
 html, body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #0f172a;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+
+/* =====================================================
+   LEAFLET
+   ===================================================== */
 .leaflet-container {
   font-family: inherit;
 }
@@ -29,6 +102,54 @@ html, body {
   border-radius: 50%;
 }
 
-.leaflet-control-attribution a {
-  color: #64748b !important;
+.leaflet-control-attribution {
+  background: var(--bg-surface) !important;
+  color: var(--map-attribution) !important;
+  border-radius: 6px 0 0 0 !important;
 }
+.leaflet-control-attribution a {
+  color: var(--map-attribution) !important;
+}
+.leaflet-control-zoom a {
+  background: var(--bg-surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--bg-surface-2) !important;
+}
+
+/* =====================================================
+   ANIMASYONLAR
+   ===================================================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 12px var(--shadow-accent); }
+  50% { box-shadow: 0 0 24px var(--shadow-accent), 0 0 48px var(--shadow-accent); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.6s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
